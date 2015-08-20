@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-07 21:29+0200\n"
-"PO-Revision-Date: 2015-08-07 21:50+0200\n"
+"POT-Creation-Date: 2015-08-19 20:18+0200\n"
+"PO-Revision-Date: 2015-08-19 20:33+0200\n"
 "Last-Translator: Pr2 <dummy@dummy.com>\n"
 "Language-Team: french\n"
 "Language: fr\n"
@@ -4046,6 +4046,9 @@ msgstr "Nom de l’événement uniquement"
 msgid "Eventview"
 msgstr "Vue événement"
 
+msgid "Eventview menu"
+msgstr "Menu aperçu des événements"
+
 msgid "Everywhere"
 msgstr "Partout"
 
@@ -4934,6 +4937,9 @@ msgstr "Version image:"
 msgid "Image-Version"
 msgstr "Version image"
 
+msgid "ImageWizard"
+msgstr "Assistant image"
+
 msgid "Immediate shutdown"
 msgstr "Extinction immédiate"
 
@@ -5140,8 +5146,8 @@ msgid "Installation finished."
 msgstr "Installation terminée."
 
 #, python-format
-msgid "Installed:\t%s\n"
-msgstr "Installé:\t%s\n"
+msgid "Installed:\t%s"
+msgstr "Installé:\t%s"
 
 msgid "Installing"
 msgstr "Installation"
@@ -6896,6 +6902,9 @@ msgstr "Image dans graphiques"
 msgid "Picture player"
 msgstr "Visualisateur"
 
+msgid "PicturePlayer"
+msgstr "Visualisateur"
+
 #. TRANSLATORS: (aspect ratio policy: black bars on left/right) in doubt, keep english term.
 msgid "Pillarbox"
 msgstr "Bandes noires"
@@ -7543,8 +7552,8 @@ msgid "Python frontend for /tmp/mmi.socket"
 msgstr "\"Frontend\" Python pour /tmp/mmi.socket"
 
 #, python-format
-msgid "Python:\t%s\n"
-msgstr "Python:\t%s\n"
+msgid "Python:\t%s"
+msgstr "Python:\t%s"
 
 msgid "Question"
 msgstr "Question"
@@ -9884,6 +9893,9 @@ msgstr "Démarrer/arrêter/sélectionner cam"
 msgid "Start/stop/select your cam, You need to install first a softcam"
 msgstr "Démarrer/arrêter/sélectionner cam, vous devez d’abord installer un softcam"
 
+msgid "StartWizard"
+msgstr "Assistant de démarrage"
+
 msgid "Starting Cam 1: "
 msgstr "Démarrage Cam 1: "
 
@@ -10240,7 +10252,7 @@ msgstr ""
 "Traduction Française\n"
 "Enigma2 - OpenATV\n"
 "Support: www.opena.tv\n"
-"Dernière MAJ: 7 août 2015"
+"Dernière MAJ: 19 août 2015"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "Fichier TS trop grand pour le niveau 1 ISO9660!"
@@ -11027,7 +11039,7 @@ msgid ""
 "Timer overlap in pm_timers.xml detected!\n"
 "Please recheck it!"
 msgstr ""
-"Chevauchement temporisateur dans timers.xml détecté!\n"
+"Chevauchement temporisateur dans pm_timers.xml détecté!\n"
 "Veuiller le re-vérifier!"
 
 msgid ""
@@ -11785,13 +11797,13 @@ msgid ""
 "\n"
 "Please press OK if you can see this page on your TV (or select a different input port).\n"
 "\n"
-"The next input port will be automatically probed in 20 seconds."
+"The next input port will be automatically probed in 10 seconds."
 msgstr ""
 "Sélection de l’entrée vidéo\n"
 "\n"
 "Appuyer sur OK si vous pouvez voir cette page sur votre TV (ou choisissez un port d’entrée différent).\n"
 "\n"
-"Le port d’entrée suivant sera automatiquement testé dans 20 secondes."
+"Le port d’entrée suivant sera automatiquement testé dans 10 secondes."
 
 msgid "Video mode selection."
 msgstr "Sélection du mode vidéo."
@@ -11825,6 +11837,9 @@ msgstr "Configuration pour vidéo améliorée"
 
 msgid "VideoEnhancementPreview"
 msgstr "Aperçu pour vidéo améliorée"
+
+msgid "VideoWizard"
+msgstr "Assistan vidéo"
 
 msgid "Videocodec"
 msgstr "Codec vidéo"
