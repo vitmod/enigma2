@@ -28,16 +28,25 @@ static std::string getSize(const char* file)
 	return tmp;
 }
 
-static void convert_8Bit_to_24Bit(Cfilepara *filepara, unsigned char *dest)
+static int convert_8Bit_to_24Bit(Cfilepara *filepara, unsigned char *dest)
 {
+	if( (!filepara) || (!dest))
+		return -1;
+
 	unsigned char *src = filepara->pic_buffer;
-	int pixel_cnt = filepara->ox * filepara->oy;
+	gRGB * palette     = filepara->palette;
+	int pixel_cnt      = filepara->ox * filepara->oy;
+
+	if( (!src) || (!palette) || (!pixel_cnt))
+		return -1;
+
 	for( int i = 0; i < pixel_cnt; i++)
 	{
-		*dest++ = filepara->palette[*src].r;
-		*dest++ = filepara->palette[*src].g;
-		*dest++ = filepara->palette[*src++].b;
+		*dest++ = palette[*src].r;
+		*dest++ = palette[*src].g;
+		*dest++ = palette[*src++].b;
 	}
+	return 0;
 }
 
 static unsigned char *simple_resize_24(unsigned char *orgin, int ox, int oy, int dx, int dy)
@@ -68,7 +77,6 @@ static unsigned char *simple_resize_24(unsigned char *orgin, int ox, int oy, int
 
 static unsigned char *simple_resize_8(unsigned char *orgin, int ox, int oy, int dx, int dy)
 {
-	eDebug("[picload.cpp simple_resize_8] x:%d y:%d  x:%d  y:%d ",ox,oy,dx,dy);
 	unsigned char* cr = new unsigned char[dx * dy];
 	if (cr == NULL)
 	{
@@ -92,7 +100,6 @@ static unsigned char *simple_resize_8(unsigned char *orgin, int ox, int oy, int 
 
 static unsigned char *color_resize(unsigned char * orgin, int ox, int oy, int dx, int dy)
 {
-	eDebug("[picload.cpp color_resize] x:%d y:%d  x:%d  y:%d ",ox,oy,dx,dy);
 	unsigned char* cr = new unsigned char[dx * dy * 3];
 	if (cr == NULL)
 	{
@@ -346,7 +353,6 @@ static void png_load(Cfilepara* filepara, unsigned int background)
 
 		if (png_get_valid(png_ptr, info_ptr, PNG_INFO_PLTE))
 		{
-			eDebug("[png_load] %d",__LINE__);
 			png_color *palette;
 			int num_palette;
 			png_get_PLTE(png_ptr, info_ptr, &palette, &num_palette);
@@ -404,7 +410,7 @@ static void png_load(Cfilepara* filepara, unsigned int background)
 		png_read_update_info(png_ptr, info_ptr);
 
 		int bpp =  png_get_rowbytes(png_ptr, info_ptr)/width;
-		if ((bpp!=4) && (bpp!=3))
+		if ((bpp != 4) && (bpp != 3))
 		{
 			eDebug("[png_load] Error processing");
 			png_destroy_read_struct(&png_ptr, &info_ptr, (png_infopp)NULL);
@@ -422,7 +428,7 @@ static void png_load(Cfilepara* filepara, unsigned int background)
 		for(int pass = 0; pass < number_passes; pass++)
 		{
 			fbptr = (png_byte *)pic_buffer;
-			for (i = 0; i < height; i++, fbptr += width * bpp)
+			for (int i = 0; i < height; i++, fbptr += width * bpp)
 				png_read_row(png_ptr, fbptr, NULL);
 		}
 		png_read_end(png_ptr, info_ptr);
@@ -444,7 +450,7 @@ static void png_load(Cfilepara* filepara, unsigned int background)
 			int bg_r = (background >> 16) & 0xFF;
 			int bg_g = (background >> 8) & 0xFF;
 			int bg_b = background & 0xFF;
-			for(i=0; i < pixel_cnt; i++)
+			for(int i = 0; i < pixel_cnt; i++)
 			{
 				r = (int)*src++;
 				g = (int)*src++;
@@ -995,16 +1001,24 @@ void ePicLoad::decodeThumb()
 			if (m_filepara->bits == 8)
 			{
 				unsigned char * tmp = new unsigned char [m_filepara->ox * m_filepara->oy * 3];
-				convert_8Bit_to_24Bit(m_filepara, tmp);
-				if(jpeg_save(cachefile.c_str(), m_filepara->ox, m_filepara->oy, tmp))
-					eDebug("[Picload] error saving cachefile");
-				delete [] tmp;
+				if(tmp)
+				{
+					if(!convert_8Bit_to_24Bit(m_filepara, tmp))
+					{
+						if(jpeg_save(cachefile.c_str(), m_filepara->ox, m_filepara->oy, tmp))
+							eDebug("[Picload] error saving cachefile");
+					}
+					else
+						eDebug("[Picload] error saving cachefile");
+					delete [] tmp;
+				}
+				else
+					eDebug("[Picload] Error malloc");
 			}
 			else
 				if(jpeg_save(cachefile.c_str(), m_filepara->ox, m_filepara->oy, m_filepara->pic_buffer))
 					eDebug("[Picload] error saving cachefile");
 		}
-
 		resizePic();
 	}
 }
@@ -1058,7 +1072,7 @@ void ePicLoad::gotMessage(const Message &msg)
 			break;
 		case Message::decode_finished: // called from main thread
 			//eDebug("[Picload] decode finished... %s", m_filepara->file);
-			if(m_filepara->callback)
+			if((m_filepara != NULL) && (m_filepara->callback))
 				PictureData(m_filepara->picinfo.c_str());
 			else
 			{
@@ -1068,6 +1082,9 @@ void ePicLoad::gotMessage(const Message &msg)
 					m_filepara = NULL;
 				}
 			}
+			break;
+		case Message::decode_error:
+			msg_main.send(Message(Message::decode_finished));
 			break;
 		default:
 			eDebug("unhandled thread message");
@@ -1092,7 +1109,7 @@ int ePicLoad::startThread(int what, const char *file, int x, int y, bool async)
 	int file_id = -1;
 	unsigned char id[10];
 	int fd = ::open(file, O_RDONLY);
-	if (fd == -1) return 1;
+	if (fd == -1) return -errno;
 	::read(fd, id, 10);
 	::close(fd);
 
@@ -1102,25 +1119,33 @@ int ePicLoad::startThread(int what, const char *file, int x, int y, bool async)
 	else if(id[0] == 'B' && id[1] == 'M' )					file_id = F_BMP;
 	else if(id[0] == 'G' && id[1] == 'I' && id[2] == 'F')			file_id = F_GIF;
 
-	if(file_id < 0)
-	{
-		eDebug("[Picload] <format not supported>");
-		return 1;
-	}
-
 	m_filepara = new Cfilepara(file, file_id, getSize(file));
 	m_filepara->max_x = x > 0 ? x : m_conf.max_x;
 	m_filepara->max_y = x > 0 ? y : m_conf.max_y;
 
-	if(m_filepara->max_x <= 0 || m_filepara->max_y <= 0)
+	if(file_id < 0 || m_filepara->max_x <= 0 || m_filepara->max_y <= 0)
 	{
+		if(file_id < 0)
+			eDebug("[Picload] <format not supported>");
+		else
+			eDebug("[Picload] <error in Para>");
+		if(async)
+		{
+			msg_thread.send(Message(Message::decode_error));
+			run();
+			return 0;
+		}
+
 		delete m_filepara;
 		m_filepara = NULL;
-		eDebug("[Picload] <error in Para>");
-		return 1;
-	}
 
-	if (async) {
+		if(file_id < 0)
+			return 2;
+		else
+			return 3;
+	}
+	if(async)
+	{
 		if(what==1)
 			msg_thread.send(Message(Message::decode_Pic));
 		else
@@ -1128,9 +1153,29 @@ int ePicLoad::startThread(int what, const char *file, int x, int y, bool async)
 		run();
 	}
 	else if (what == 1)
+	{
 		decodePic();
+		if(!m_filepara->pic_buffer)
+		{
+		// in case of memeory leak, maybe we need this
+		//	delete m_filepara;
+		//	m_filepara = NULL;
+			eDebug("[Picload] <no data>");
+			return 4;
+		}
+	}
 	else
+	{
 		decodeThumb();
+		if(!m_filepara->pic_buffer)
+		{
+		//in case of memeory leak, maybe we need this
+		//	delete m_filepara;
+		//	m_filepara = NULL;
+			eDebug("[Picload] <no data>");
+			return 4;
+		}
+	}
 	return 0;
 }
 

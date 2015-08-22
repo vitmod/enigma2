@@ -2669,6 +2669,7 @@ class ChannelSelectionRadio(ChannelSelectionBase, ChannelSelectionEdit, ChannelS
 	def __onClose(self):
 		lastservice = eServiceReference(config.tv.lastservice.value)
 		self.session.nav.playService(lastservice)
+		self.session.deleteDialog(self.info)
 
 	def startRassInteractive(self):
 		self.info.hide()
