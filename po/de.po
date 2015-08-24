@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-11-05 14:38+0000\n"
-"PO-Revision-Date: 2015-08-17 17:58+0100\n"
+"PO-Revision-Date: 2015-08-24 23:17+0100\n"
 "Last-Translator: mike99 <mike99@mail.to>\n"
 "Language-Team: openATV\n"
 "Language: de\n"
@@ -10024,10 +10024,10 @@ msgid "Zap mode"
 msgstr "Umschaltmodus"
 
 msgid "[TimeShift] - Merging records failed!"
-msgstr "[TimeShift] - Zusammenführen der Aufnahmen fehlgeschlagen!"
+msgstr "TimeShift - Zusammenführen der Aufnahmen fehlgeschlagen!"
 
 msgid "[TimeShift] - Restarting Timeshift!"
-msgstr "[TimeShift] - Timeshift-Neustart!"
+msgstr "Timeshift wird erneut gestartet !"
 
 msgid "Zap to selected channel"
 msgstr "Schalte zum ausgewählten Sender um"
@@ -10039,10 +10039,35 @@ msgid "Zoom Off..."
 msgstr "Zoom aus..."
 
 msgid "[TimeShift] Restarting Timeshift!"
-msgstr "[Timeshift] Timeshift erneut starten!"
+msgstr "Timeshift wird erneut gestartet !"
 
 msgid "[Timeshift] Merging records failed!"
-msgstr "[Timeshift] Zusammenfügen der Aufnahmen fehlgeschlagen!"
+msgstr "Timeshift - Zusammenfügen der Aufnahmen fehlgeschlagen!"
+
+msgid "Switching to live TV - timeshift is still active!"
+msgstr "Schalte auf Live-TV um - Timeshift bleibt weiterhin aktiv !"
+
+msgid "First playable timeshift file!"
+msgstr "Sie befinden sich am Anfang der ersten abspielbaren Timeshift-Datei !"
+
+msgid ""
+"Can't going to live TV!\n"
+"Switch to live TV and restart Timeshift ?"
+msgstr ""
+"Es kann nicht zum Live-TV geschaltet werden !\n"
+"Zum Live-TV schalten und Timeshift erneut starten ?"
+
+msgid ""
+"Can't play the next Timeshift file!\n"
+"Switch to live TV and restart Timeshift ?"
+msgstr ""
+"Die nächste Timeshift-Datei kann nicht abgespielt werden !\n"
+"Zum Live-TV schalten und Timeshift erneut starten ?"
+
+msgid "Can't play the previous timeshift file! You can try again."
+msgstr ""
+"Die vorherige Timeshift-Datei kann nicht abgespielt werden !\n"
+"Sie können es noch einmal versuchen."
 
 msgid "[alternative edit]"
 msgstr "[Alternativen-Bearbeitung]"
@@ -16152,3 +16177,83 @@ msgstr "Vollbild-Auflösung"
 # 5.1 /Plugins\Extensions\PicturePlayer
 msgid "Same resolution as skin"
 msgstr "wie im Skin"
+
+# ChannelSelection.py
+msgid "purge deleted userbouquets"
+msgstr "Gelöschte Userbouquets entfernen"
+
+# ChannelSelection.py
+msgid "restore deleted userbouquets"
+msgstr "Gelöschte Userbouquets wiederherstellen"
+
+# ChannelSelection.py
+msgid "Are you sure to purge all deleted userbouquets?"
+msgstr "Sind Sie sicher, alle gelöschten Userbouquets zu entfernen?"
+
+#: TimerEntry.py
+msgid "normal"
+msgstr ""
+
+#: TimerEntry.py
+msgid "%d %B %Y"
+msgstr ""
+
+#: TimerEntry.py
+msgid "Set the name the recording will get."
+msgstr "Hier können Sie den Namen der Aufnahme ändern."
+
+#: TimerEntry.py
+msgid "Set the description of the recording."
+msgstr "Hier können Sie die Beschreibung der Aufnahme ändern."
+
+#: TimerEntry.py
+msgid "Chose between record and ZAP."
+msgstr "Wählen Sie zwischen Aufnahme/Umschalt-Timer oder umschalten und aufnehmen."
+
+#: TimerEntry.py
+msgid "A repeating timer or just once?"
+msgstr "Soll dieser Timer einmalig oder wiederholt ausgeführt werden?"
+
+#: TimerEntry.py
+msgid "Choose between Daily, Weekly, Weekdays or user defined."
+msgstr ""
+
+#: TimerEntry.py:202 TimerEntry.py
+msgid "Set the date the timer must start."
+msgstr "Hier können Sie das Datum der Aufnahme ändern."
+
+#: TimerEntry.py
+msgid "Rename name and description for new events"
+msgstr ""
+
+#: TimerEntry.py
+msgid "Set the time the timer must start."
+msgstr "Hier können Sie die Startzeit der Aufnahme ändern."
+
+#: TimerEntry.py:229 TimerEntry.py
+msgid "Set the time the timer must stop."
+msgstr "Hier können Sie die Endzeit der Aufnahme ändern."
+
+#: TimerEntry.py
+msgid "Set the channel for this timer."
+msgstr "Hier können Sie den Kanal von dem aufgenommen werden soll ändern."
+
+#: TimerEntry.py:241 TimerEntry.py
+msgid "What action is required on complettion of the timer? 'Auto' lets the box return to the state it had when the timer started. 'Do nothing', 'Go to standby' and 'Go to deep standby' do ecaxtly that."
+msgstr ""
+
+#: TimerEntry.py
+msgid "Where should the recording be saved?"
+msgstr ""
+
+#: TimerEntry.py
+msgid "Choose a tag for easy finding a recording."
+msgstr ""
+
+#: TimerEntry.py
+msgid "Please enter new description:"
+msgstr ""
+
+#: TimerEntry.py
+msgid "Select target folder"
+msgstr ""
