@@ -69,7 +69,7 @@ else:
 config.plugins.configurationbackup.backupdirs = ConfigLocations(default=[eEnv.resolve('${sysconfdir}/enigma2/'), '/etc/CCcam.cfg', '/usr/keys/', '/usr/bin/*cam*',
 																		 '/etc/init.d/softcam*', '/etc/tuxbox/config/', '/etc/*.emu', '/etc/auto.network', '/etc/enigma2/automounts.xml',
 																		 '/etc/default/dropbear', '/home/root/.ssh/', '/etc/samba/', '/etc/fstab', '/etc/inadyn.conf', 
-																		 '/etc/network/interfaces', '/etc/wpa_supplicant.conf', '/etc/wpa_supplicant.ath0.conf',
+																		 '/etc/network/interfaces', '/etc/wpa_supplicant.conf', '/etc/wpa_supplicant.ath0.conf', '/etc/opkg/secret-feed.conf',
 																		 '/etc/wpa_supplicant.wlan0.conf', '/etc/resolv.conf', '/etc/default_gw', '/etc/hostname',
 																		 eEnv.resolve("${datadir}/enigma2/keymap.usr"), eEnv.resolve("${datadir}/enigma2/keymap.ntr")])
 
@@ -93,6 +93,7 @@ config.plugins.softwaremanager.updatetype = ConfigSelection(
 					("hot", _("Upgrade with GUI")),
 					("cold", _("Unattended upgrade without GUI")),
 				], "hot")
+config.plugins.softwaremanager.epgcache = ConfigYesNo(default=False)
 
 def write_cache(cache_file, cache_data):
 	#Does a cPickle dump

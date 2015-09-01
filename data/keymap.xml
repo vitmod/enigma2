@@ -764,6 +764,12 @@
 		<key id="KEY_BLUE" mapto="bluelong" flags="l"/>
 	</map>
 
+	<map context="FunctionKeyActions">
+		<key id="KEY_F1" mapto="f1" flags="m"/>
+		<key id="KEY_F2" mapto="f2" flags="m"/>
+		<key id="KEY_F3" mapto="f3" flags="m"/>
+	</map>
+
 	<map context="MsgBoxActions">
 		<key id="KEY_GREEN" mapto="alwaysOK" flags="m" />
 		<key id="KEY_OK" mapto="ok" flags="m" />
@@ -988,6 +994,8 @@
 		<key id="KEY_LIST" mapto="playlist_long" flags="l"/>
 		<key id="KEY_FILE" mapto="file" flags="b"/>
 		<key id="KEY_FILE" mapto="file_long" flags="l"/>
+		<key id="KEY_FAVORITES" mapto="favorites" flags="b"/>
+		<key id="KEY_FAVORITES" mapto="favorites_long" flags="l"/>
 		<key id="KEY_MEDIA" mapto="media" flags="b"/>
 		<key id="KEY_MEDIA" mapto="media_long" flags="l"/>
 		<key id="KEY_OPEN" mapto="open" flags="b"/>
@@ -1018,6 +1026,8 @@
 		<key id="KEY_F2" mapto="f2_long" flags="l"/>
 		<key id="KEY_F3" mapto="f3" flags="b"/>
 		<key id="KEY_F3" mapto="f3_long" flags="l"/>
+		<key id="KEY_AUX" mapto="HDMIin" flags="b"/>
+		<key id="KEY_AUX" mapto="HDMIin_long" flags="l"/>
 	</map>
 	<map context="SubtitlesActions">
 		<key id="KEY_SUBTITLE" mapto="subtitles" flags="m" />
